@@ -10,13 +10,15 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OlaSdkTest sdk = OlaSdkTest(
-      apiKey: 'lY1kkpDDPVrIieZru060G5TufluaNQDLkDA0ZeCK',
-    );
-    return MaterialApp(
+    // OlaSdkTest sdk = OlaSdkTest(
+    //   apiKey: 'lY1kkpDDPVrIieZru060G5TufluaNQDLkDA0ZeCK',
+    // );
+    return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: sdk.autofillTextField(),
+          child: SearchField(
+            apiKey: 'lY1kkpDDPVrIieZru060G5TufluaNQDLkDA0ZeCK',
+          ),
         ),
       ),
     );

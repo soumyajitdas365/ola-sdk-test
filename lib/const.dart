@@ -1,3 +1,3 @@
 String kApiKey = "";
-String kClientKey = "";
-String kClientSecret = "";
+
+enum ApiType { autoComplete, searchText, placeDetails, nearbySearch }
