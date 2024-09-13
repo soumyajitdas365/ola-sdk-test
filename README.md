@@ -30,17 +30,81 @@ start using the package.
 
 Import necessary packages:
 
-'''import 'package:flutter/material.dart';
-import 'package:ola_sdk_test/search_field.dart';'''
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
 ```dart
-const like = 'sample';
+import 'package:flutter/material.dart';
+import 'package:ola_sdk_test/search_field.dart';
+```
+
+**Obtain your OLA Maps API Key:**
+
+- Create an OLA Maps developer account and acquire your API key.
+- Store the API key securely within your application.
+
+```
+SearchField(
+  apiKey: yourOlaMapsApiKey,
+  // Other properties (optional)
+  hintText: "Search for places...",
+  onChanged: (address) {
+    // Handle address selection
+    if (address != null) {
+      print("Selected address: ${address.description}");
+    }
+  },
+);
 ```
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+**Available Properties:**
+
+- `apiKey`: (Required) Your Ola API key.
+- `apiType`: (Optional) Choose between `AutoComplete` and `SearchText`. Defaults to `AutoComplete`.
+  - `AutoComplete`: Used for basic autocomplete suggestions.
+  - `SearchText`: Used for advanced search with additional parameters like location, radius, size, and types. You can configure these parameters on the `SearchText` object.
+- `closedHeaderPadding`: Padding for the closed state of the search field.
+- `controller`: (Optional) A controller to manage the selected address.
+- `decoration`: Customize the appearance of the search field.
+- `disabledDecoration`: Decoration for the disabled state of the search field (optional).
+- `enabled`: Control if the search field is enabled (default: true).
+- `excludeSelected`: Hide the selected item from the suggestion list (default: true).
+- `expandedHeaderPadding`: Padding for the expanded state of the search field.
+- `futureRequestDelay`: Delay before executing the API request (optional).
+- `headerBuilder`: Build a custom header for the search field (optional).
+- `hideSelectedFieldWhenExpanded`: Hide the selected item when the suggestion list is open (optional).
+- `hintText`: Placeholder text for the search field.
+- `itemsListPadding`: Padding for the suggestion list.
+- `listItemPadding`: Padding for each suggestion item.
+- `maxlines`: Maximum number of lines for text display.
+- `noResultFoundBuilder`: Build a custom widget for the case where no search results are found (optional).
+- `noResultFoundText`: Text displayed when no search results are found (default: "No result found.").
+- `onChanged`: Callback function triggered when an address is selected.
+- `overlayController`: (Optional) Control the visibility of the suggestion list overlay.
+- `overlayHeight`: Height of the suggestion list overlay (optional).
+- `searchHintText`: Placeholder text for the search input (optional).
+- `searchRequestLoadingIndicator`: Widget to display while loading search results (optional).
+- `visibility`: (Optional) Callback function to control the visibility of the search field.
+- `canCloseOutsideBounds`: (Optional) Control if the suggestion list closes when tapping outside (default: true).
+- `closeDropDownOnClearFilterSearch`: (Optional) Close the suggestion list when clearing the search text.
+
+**SearchText Parameters:**
+
+- `location`: (Optional) Specify a location for the search.
+- `radius`: (Optional) Define a search radius in meters.
+- `size`: (Optional) Limit the number of search results returned.
+- `types`: (Optional) Filter search results by place type (e.g., "restaurant", "atm").
+
+```
+SearchField(
+  apiKey: apiKey,
+  apiType: SearchText(
+    location: "Kolkata, India",
+    radius: 5000,
+    types: ["restaurant"],
+  ),
+  hintText: "Search for restaurants...",
+  onChanged: (address) {
+    // Handle address
+}
+
+```
