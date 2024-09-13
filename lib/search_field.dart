@@ -1,7 +1,7 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ola_sdk_test/api.dart';
-import 'package:ola_sdk_test/const.dart';
+import 'package:ola_sdk_test/api_types.dart';
 import 'package:ola_sdk_test/models/auto_complete_response_model.dart';
 export 'package:animated_custom_dropdown/custom_dropdown.dart';
 
@@ -34,9 +34,20 @@ class SearchField extends StatelessWidget {
     this.searchRequestLoadingIndicator,
     this.visibility,
     required this.apiKey,
+    this.apiType = const AutoComplete(),
   });
 
+  /// Define your api key
   final String apiKey;
+
+  /// Two types of api available
+  ///  1. AutoComplete
+  ///  2. SearchText
+  ///
+  /// Choose according to your requirements
+  ///
+  /// Default to AutoComplete
+  final ApiType apiType;
 
   /// Scroll controller to access items list scroll behavior.
   final ScrollController? itemsScrollController;
@@ -157,8 +168,25 @@ class SearchField extends StatelessWidget {
         closeDropDownOnClearFilterSearch: closeDropDownOnClearFilterSearch,
         canCloseOutsideBounds: canCloseOutsideBounds,
         futureRequest: (query) {
-          return Api.autoComplete(query);
+          if (apiType is SearchText) {
+            return Api.searchText(
+              query,
+              location: (apiType as SearchText).location,
+              radius: (apiType as SearchText).radius,
+              size: (apiType as SearchText).size,
+              types: (apiType as SearchText).types,
+            );
+          } else if (apiType is AutoComplete) {
+            return Api.autoComplete(query,
+                location: (apiType as AutoComplete).location,
+                radius: (apiType as AutoComplete).radius,
+                strictbounds: (apiType as AutoComplete).strictbounds);
+          } else {
+            return Api.autoComplete(
+              query,
+            );
+          }
         },
-        onChanged: (value) {});
+        onChanged: onChanged);
   }
 }

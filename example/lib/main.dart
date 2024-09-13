@@ -15,10 +15,20 @@ class MainApp extends StatelessWidget {
     // );
     return const MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: SearchField(
-            apiKey: 'lY1kkpDDPVrIieZru060G5TufluaNQDLkDA0ZeCK',
-          ),
+        body: Column(
+          children: [
+            Center(
+              child: SearchField(
+                apiKey: 'lY1kkpDDPVrIieZru060G5TufluaNQDLkDA0ZeCK',
+              ),
+            ),
+            Center(
+              child: SearchField(
+                apiType: SearchText(),
+                apiKey: 'lY1kkpDDPVrIieZru060G5TufluaNQDLkDA0ZeCK',
+              ),
+            ),
+          ],
         ),
       ),
     );
